@@ -17,7 +17,7 @@
 
 dict 这个函数创建一个没有项目的空字典。因为 dict 似乎内置函数的名字了，所以你应该避免用来做变量名。
 
-```Python
+```py
 >>> eng2sp = dict()
 >>> eng2sp
 {}
@@ -25,23 +25,23 @@ dict 这个函数创建一个没有项目的空字典。因为 dict 似乎内置
 
 大括号，也叫花括号，就是{}，代表了一个空字典。要在字典里面加项，可以使用方括号：
 
-```Python
+```py
 >>> eng2sp['one'] = 'uno'
 ```
 这一行代码建立了一个项，这个项映射了键 'one' 到键值 'uno'。如果我们再来打印输出一下这个字典，就会看到里面有这样一个键值对了，键值对中间用冒号隔开了：
 
-```Python
+```py
 >>> eng2sp
 {'one': 'uno'}
 ```
 这种输出的格式也可以用来输入。比如你可以这样建立一个有三个项的字典：
 
-```Python
+```py
 >>> eng2sp = {'one': 'uno', 'two': 'dos', 'three': 'tres'}
 ```
 再来输出一下，你就能看到字典建好了，但顺序不一样：
 
-```Python
+```py
 >>> eng2sp
 {'one': 'uno', 'three': 'tres', 'two': 'dos'}
 ```
@@ -51,7 +51,7 @@ dict 这个函数创建一个没有项目的空字典。因为 dict 似乎内置
 
 但者其实也不要紧，因为字典里面的元素并不是用整数索引来排列的。所以你就可以直接用键来查找对应的键值：
 
-```Python
+```py
 >>> eng2sp['two']
 'dos'
 ```
@@ -60,19 +60,19 @@ dict 这个函数创建一个没有项目的空字典。因为 dict 似乎内置
 
 如果你字典中没有你指定的键，你就得到如下提示：
 
-```Python
+```py
 >>> eng2sp['four']
 KeyError: 'four'
 ```
 len 函数也可以用在字典上；它会返回键值对的数目：
 
-```Python
+```py
 >>> len(eng2sp)
 3
 ```
 in 运算符也适用于字典；你可以用它来判断某个键是不是存在于字典中（是判断键，不能判断键值）。
 
-```Python
+```py
 >>> 'one' in eng2sp
 True
 >>> 'uno' in eng2sp
@@ -80,7 +80,7 @@ False
 ```
 要判断键值是否在字典中，你就要用到 values 方法，这个方法会把键值返回，然后用 in 判断就可以了：
 
-```Python
+```py
 >>> vals = eng2sp.values()
 >>> 'uno' in vals
 True
@@ -108,7 +108,7 @@ in 运算符在字典中和列表中有不同的算法了。对列表来说，�
 
 下面是代码样例：
 
-```Python
+```py
 def histogram(s):
 	d = dict()
 	for c in s:
@@ -124,7 +124,7 @@ def histogram(s):
 
 下面是使用的样例：
 
-```Python
+```py
 >>> h = histogram('brontosaurus')
 >>> h
 {'a': 1, 'b': 1, 'o': 2, 'n': 1, 's': 2, 'r': 2, 'u': 2, 't': 1}
@@ -135,7 +135,7 @@ histogram 的结果表明字母 a 和 b 出现了一次，o 出现了两次，�
 
 字典有一个方法，叫做 get，接收一个键和一个默认值。如果这个键在字典中存在，get 就会返回对应的键值；如果不存在，它就会返回这个默认值。比如：
 
-```Python
+```py
 >>> h = histogram('a')
 >>> h
 {'a': 1}
@@ -151,7 +151,7 @@ histogram 的结果表明字母 a 和 b 出现了一次，o 出现了两次，�
 
 如果你在 for 语句里面用字典，程序会遍历字典中的所有键。例如下面这个 print_hist 函数就输出其中的每一个键与对应的键值：
 
-```Python
+```py
 def print_hist(h):
 	for c in h:
 		print(c, h[c])
@@ -159,7 +159,7 @@ def print_hist(h):
 
 输出如下所示：
 
-```Python
+```py
 >>> h = histogram('parrot')
 >>> print_hist(h)
 a 1 p 1 r 2 t 1 o 1
@@ -173,7 +173,7 @@ a 1 p 1 r 2 t 1 o 1
 
 但如果你有键值 v 而要找键 k 呢？你有两个问题了：首先，可能有不止一个键的键值为 v。根据应用的不同，你也许可以从中选一个，或者就可以把所有对应的键做成一个列表。其次，没有一种简单的语法能实现这样一种逆向查找；你必须搜索一下。
 
-```Python
+```py
 def reverse_lookup(d, v):
 	for k in d:
 		if d[k] == v:
@@ -189,7 +189,7 @@ def reverse_lookup(d, v):
 
 下面是一个成功进行逆向查找的样例：
 
-```Python
+```py
 >>> h = histogram('parrot')
 >>> k = reverse_lookup(h, 2)
 >>> k
@@ -198,7 +198,7 @@ def reverse_lookup(d, v):
 
 下面这个是一个不成功的：
 
-```Python
+```py
 >>> k = reverse_lookup(h, 3)
 Traceback (most recent call last):   File "<stdin>", line 1, in <module>   File "<stdin>", line 5, in reverse_lookup ValueError
 ```
@@ -208,7 +208,7 @@ Traceback (most recent call last):   File "<stdin>", line 1, in <module>   File 
 
 raise 语句可以给出详细的错误信息作为可选的参数。如下所示：
 
-```Python
+```py
 >>> raise ValueError('value does not appear in the dictionary')
 Traceback (most recent call last):   File "<stdin>", line 1, in ?
 ValueError: value does not appear in the dictionary
@@ -223,7 +223,7 @@ ValueError: value does not appear in the dictionary
 
 下面就是一个逆转字典的函数：
 
-```Python
+```py
 def invert_dict(d):
 	inverse = dict()
 	for key in d:
@@ -239,7 +239,7 @@ def invert_dict(d):
 
 下面是一个样例：
 
-```Python
+```py
 >>> hist = histogram('parrot')
 >>> hist
 {'a': 1, 'p': 1, 'r': 2, 't': 1, 'o': 1}
@@ -257,7 +257,7 @@ ________________________________________
 
 如图所示，用字典中的键值组成列表，而不能用键。如果你要用键的话，就会遇到如下所示的错误：
 
-```Python
+```py
 >>> t = [1, 2, 3]
 >>> d = dict()
 >>> d[t] = 'oops'
@@ -296,7 +296,7 @@ ________________________________________
 
 另外一种思路就是保存一下已经被计算过的值，然后保存在一个字典中。之前计算过的值存储起来，这样后续的运算中能够使用，这就叫备忘。下面是一个用这种思路来实现的斐波那契函数：
 
-```Python
+```py
 known = {0:0, 1:1}
 def fibonacci(n):
 	if n in known:
@@ -321,7 +321,7 @@ known 是一个用来保存已经计算斐波那契函数值的字典。开始�
 
 一般常用全局变量作为 flag，也就是标识；比如用来判断一个条件是否成立的布尔变量之类的。比如有的程序用名字为 verbose 的标识变量，来控制输出内容的详细程度：
 
-```Python
+```py
 verbose = True
 def example1():
 	if verbose:
@@ -330,7 +330,7 @@ def example1():
 
 如果你想给全局变量重新赋值，结果会很意外。下面的例子中，本来是想要追踪确定函数是否被调用了：
 
-```Python
+```py
 been_called = False
 def example2():
 	been_called = True         # WRONG
@@ -341,7 +341,7 @@ def example2():
 
 要在函数内部来给全局变量重新赋值，必须要在使用之前声明这个全局变量：
 
-```Python
+```py
 been_called = False
 	def example2():
 		global been_called
@@ -353,7 +353,7 @@ global 那句代码的效果是告诉解释器：『在这个函数内，been_ca
 
 下面的例子中，试图对全局变量进行更新：
 
-```Python
+```py
 count = 0
 def example3():
 	count = count + 1          # WRONG
@@ -361,7 +361,7 @@ def example3():
 
 运行的话，你会得到如下提示：
 
-```Python
+```py
 UnboundLocalError: local variable 'count' referenced before assignment
 ```
 
@@ -371,7 +371,7 @@ UnboundLocalError: local variable 'count' referenced before assignment
 
 Python 会假设这个 count 是局部的，然后基于这样的假设，你就是在写出该变量之前就试图读取。这样问题的解决方法依然就是声称 count 为全局变量。
 
-```Python
+```py
 def example3():
 	global count
 	count += 1
@@ -379,7 +379,7 @@ def example3():
 
 如果全局变量指向的是一个可修改的值，你可以无需声明该变量就直接修改：
 
-```Python
+```py
 known = {0:0, 1:1}
 def example4():
 	known[2] = 1
@@ -387,7 +387,7 @@ def example4():
 
 所以你可以在全局的列表或者字典里面添加、删除或者替换元素，但如果你要重新给这个全局变量赋值，就必须要声明了：
 
-```Python
+```py
 def example5():
 	global known
 	known = dict()

@@ -16,7 +16,7 @@
 
 例如，下面这个表格就表示了花色与整数编码之间的映射关系：
 
-```Python
+```py
 Spades	↦	3
 Hearts	↦	2
 Diamonds	↦	1
@@ -26,7 +26,7 @@ Clubs	↦	0
 
 牌面大小的映射就很明显了；每一张牌都对应着相应大小的整数，对于有人像的几张映射如下所示：
 
-```Python
+```py
 Jack	↦	11
 Queen	↦	12
 King	↦	13
@@ -35,7 +35,7 @@ King	↦	13
 
 这样实现的纸牌类的定义如下所示：
 
-```Python
+```py
 class Card:
 """Represents a standard playing card."""
 	def __init__(self, suit=0, rank=2):
@@ -47,14 +47,14 @@ class Card:
 
 要建立一张纸牌，可以用你想要的花色和牌值调用 Card。
 
-```Python
+```py
 queen_of_diamonds = Card(1, 12)
 ```
 ## 18.2  类的属性
 
 想要以易于被人理解的方式来用 print 打印输出纸牌对象，我们就得建立一个从整形编码到对应的牌值和花色的映射。最自然的方法莫过于用字符串列表来实现。咱们可以先把这些列表赋值到类的属性中去：
 
-```Python
+```py
 #  inside class Card:
 suit_names = ['Clubs', 'Diamonds', 'Hearts', 'Spades']
 rank_names = [None, 'Ace', '2', '3', '4', '5', '6', '7','8', '9', '10', 'Jack', 'Queen', 'King']
@@ -82,7 +82,7 @@ rank_names 的一个元素是 None 空，因为没有牌值为 0 的纸牌。包
 
 目前已经有了这些方法了，咱们就可以创建和打印输出纸牌了：
 
-```Python
+```py
 >>> card1 = Card(2, 11)
 >>> print(card1)
 Jack of Hearts
@@ -106,7 +106,7 @@ __lt__ 接收两个参数，一个是 self，一个是另外一个对象，如�
 
 确定好规则了，就可以写这个 __lt__ 方法了：
 
-```Python
+```py
 #  inside class Card:
 def __lt__(self, other):
 #  check the suits
@@ -120,7 +120,7 @@ def __lt__(self, other):
 
 用元组对比就可以把代码写得更简洁了：
 
-```Python
+```py
 #  inside class Card:
 def __lt__(self, other):
 	t1 = self.suit, self.rank
@@ -137,7 +137,7 @@ def __lt__(self, other):
 
 下面就是一个一副纸牌类的定义。init 方法建立了一个属性 cards，然后生成了标准的五十二张牌来初始化。
 
-```Python
+```py
 class Deck:
 	def __init__(self):
 		self.cards = []
@@ -153,7 +153,7 @@ class Deck:
 
 下面是 Deck 类的 __str__ 方法：
 
-```Python
+```py
 # inside class Deck:
 def __str__(self):
 	res = []
@@ -169,7 +169,7 @@ Since we invoke join on a newline character, the cards are separated by newlines
 
 由于我们调用 join 的位置在换行符后面，这样这些纸牌就被换行符分开了。程序运行结果如下所示：
 
-```Python
+```py
 >>> deck = Deck()
 >>> print(deck)
 Ace of Clubs
@@ -188,7 +188,7 @@ King of Spades
 
 要处理纸牌，我们还需要一个方法来从牌堆中拿出和放入纸牌。列表的 pop 方法很适合来完成这件任务：
 
-```Python
+```py
 # inside class Deck:
 def pop_card(self):
 	return self.cards.pop()
@@ -196,7 +196,7 @@ def pop_card(self):
 pop 方法从列表中拿走最后一张牌，这样就是从一副牌的末尾来处理。
 要添加一张牌，可以用列表的 append 方法：
 
-```Python
+```py
 # inside class Deck:
 def add_card(self, card):
 	self.cards.append(card)
@@ -209,7 +209,7 @@ def add_card(self, card):
 
 再举一个例子，咱们再来给 Deck 写一个洗牌的方法，用 random（随机的意思）模块的 shuffle 方法：
 
-```Python
+```py
 #  inside class Deck:
 def shuffle(self):
 	random.shuffle(self.cards)
@@ -227,7 +227,7 @@ I
 
 类之间这种相似又有区别的关系，就适合用继承来实现了。要继承一个已有的类来定义新类，就要把已有类的名字放到括号中，如下所示：
 
-```Python
+```py
 class Hand(Deck):
 """Represents a hand of playing cards."""
 ```
@@ -240,7 +240,7 @@ class Hand(Deck):
 
 在本章的这个例子中，Hand 类从 Deck 类继承了 __init__ 方法，但这个方法和我们的需求还不一样：Hand 类的 init 方法应该用一个空列表来初始化手中的牌，而不是像 Deck 类中那样用一整副 52 张牌。
 
-```Python
+```py
 #  inside class Hand:
 def __init__(self, label=''):
 	self.cards = []
@@ -248,7 +248,7 @@ def __init__(self, label=''):
 ```
 像上面这样改写一下之后，这样再建立一个 Hand 类的时候，Python 就会调用这个自定义的 init 方法，而不是 Deck 当中的。
 
-```Python
+```py
 >>> hand = Hand('new hand')
 >>> hand.cards []
 >>> hand.label
@@ -257,7 +257,7 @@ def __init__(self, label=''):
 
 其他方法都从 Deck 类中继承了过来，所以我们就可以直接用 pop_card 和 add_card 方法来处理纸牌了：
 
-```Python
+```py
 >>> deck = Deck()
 >>> card = deck.pop_card()
 >>> hand.add_card(card)
@@ -266,7 +266,7 @@ King of Spades
 ```
 接下来很自然地，我们把这段名为 move_cards 的方法放进去：
 
-```Python
+```py
 # inside class Deck:
 def move_cards(self, hand, num):
 	for i in range(num):
@@ -331,7 +331,7 @@ ________________________________________
 
 另外一个思路，就是用下面这个函数，该函数接收一个对象和一个方法的名字（作为字符串），然后返回提供该方法定义的类的名称。
 
-```Python
+```py
 def find_defining_class(obj, meth_name):
 	for ty in type(obj).mro():
 		if meth_name in ty.__dict__:
@@ -340,7 +340,7 @@ def find_defining_class(obj, meth_name):
 
 如下所示：
 
-```Python
+```py
 >>> hand = Hand()
 >>> find_defining_class(hand, 'shuffle')
 <class 'Card.Deck'>
@@ -367,7 +367,7 @@ H
 
 比如马科夫分析，在 13.8 中出现的，就是一个很好的例子。如果你从[这里](http://thinkpython2.com/code/markov.py)下载了我的样例代码，你就会发现这里用了两个全局变量—suffix_map 以及 prefix—这两个全局变量会被多个函数读取和写入。
 
-```Python
+```py
 suffix_map = {}
 prefix = ()
 ```
@@ -377,7 +377,7 @@ prefix = ()
 
 如果要运行多次分析，并且要对这些分析进行区分，我们可以把每次分析的状态封装到对象中。如下所示：
 
-```Python
+```py
 class Markov:
 	def __init__(self):
 		self.suffix_map = {}
@@ -386,7 +386,7 @@ class Markov:
 
 接下来就是把各个函数转换成方法。例如下面就是 process_word 方法：
 
-```Python
+```py
 def process_word(self, word, order=2):
 	if len(self.prefix) < order:
 		self.prefix += (word,)
@@ -484,7 +484,7 @@ A program development plan that involves a prototype using global variables and 
 
 阅读下面的代码，画一个 UML 类图，表示出程序中的类，以及类之间的关系。
 
-```Python
+```py
 class PingPongParent:
 	pass  class Ping(PingPongParent):
 	def __init__(self, pong):

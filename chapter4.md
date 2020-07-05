@@ -15,7 +15,7 @@
 
 要检查你是不是已经安装了这个乌龟模块，你要打开 Python 解释器来输入如下内容：
 
-```Python
+```py
 >>> import turtle 
 >>> bob = turtle.Turtle() 
 ```
@@ -24,7 +24,7 @@
 
 建立一个叫做 mypolygon.py 的文件，在里面输入如下内容：
 
-```Python
+```py
 import turtle 
 bob = turtle.Turtle() 
 print(bob) 
@@ -43,7 +43,7 @@ mainloop 这个函数是告诉窗口等用户来做些事情，当然本次尝�
 
 一旦你创建了一个 Trutle，你就可以调用一些方法让他在窗口中移动。方法跟函数有点相似，但语法的使用稍微不太一样。比如你可以让小乌龟往前走：
 
-```Python
+```py
 bob.fd(100) 
 ```
 fd 这个方法，是 turtle 类这个叫做 bob 的对象所包含的。调用这个方法就像是做出一个请求一样：你再让 bob 向前移动。fd 这个方法的参数是像素数距离，所以实际的大小依赖于你显示器的情况了。
@@ -57,7 +57,7 @@ Turtle 对象中还有一些其他方法，比如 bk 是后退，lt 是左转，
 
 画一个直角，就要把下面这些线加到程序里面（当然要先创建一个 bob 并且在此之前运行 mainloop）：
 
-```Python
+```py
 bob.fd(100) 
 bob.lt(90) 
 bob.fd(100) 
@@ -72,7 +72,7 @@ bob.fd(100)
 
 你估计会写出如下的内容：
 
-```Python
+```py
 bob.fd(100) 
 bob.lt(90)  
 bob.fd(100) 
@@ -84,7 +84,7 @@ bob.fd(100)
 
 上面这个太麻烦了，咱们可以用一个 for 语句来让这个过程更简洁。把下面的代码添加到 mypolygon.py 中然后运行一下：
 
-```Python
+```py
 for i in range(4):     
 	print('Hello!') 
 ```
@@ -103,7 +103,7 @@ Hello!
 
 这就是一个用 for 语句来画正方形的语句：
 
-```Python
+```py
 for i in range(4):     
 	bob.fd(100)     
 	bob.lt(90) 
@@ -137,7 +137,7 @@ for 语句也被叫做循环，因为运行流程会重复执行循环体。在�
 
 第一个练习让你把正方形绘制的代码定义到一个函数里面，然后调用这个函数，传入一个 turtle 对象作为参数。下面就是个例子了：
 
-```Python
+```py
 def square(t):     
 	for i in range(4):         
 		t.fd(100)         
@@ -149,7 +149,7 @@ square(bob)
 
 在函数体内部，t 所指代的就是小乌龟 bob，因此让 t 来左转九十度的效果完全等同于让 bob 来左转九十度。本文中没有把形式参数的名字设置成 bob，这是为啥呢？是因为用 t 可以指代任意一个小乌龟，不仅仅是 bob，所以你就能再创建另一个小乌龟，把它传递给 square 这个函数作为实际参数：
 
-```Python
+```py
 alice = Turtle() 
 square(alice) 
 ```
@@ -160,7 +160,7 @@ square(alice)
 
 下一步就是给 square 函数添加一个长度参数了。下面是样例：
 
-```Python
+```py
 def square(t, length):     
 	for i in range(4):         
 		t.fd(length)         
@@ -172,7 +172,7 @@ square(bob, 100)
 
 下一步也还是泛化。这次就是不光要画正方形了，要画一个多边形，可以指定边数的。下面是样例：
 
-```Python
+```py
 def polygon(t, n, length):    
 	angle = 360 / n     
 	for i in range(n):         
@@ -188,7 +188,7 @@ polygon(bob, 7, 70)
 
 当一个函数有超过一个数据参数的时候，很容易忘掉这些参数都是什么，或者忘掉他们的顺序。为了避免这个情况，可以把形式参数的名字包含在一个实际参数列表中：
 
-```Python
+```py
 polygon(bob, n=7, length=70)
 ```
 
@@ -200,7 +200,7 @@ polygon(bob, n=7, length=70)
 
 下一步就是写 circle 这个函数了，需要半径 r 作为一个参数。下面是一个简单的样例，使用 polygon 函数来画一个 50 边形，来接近一个圆：
 
-```Python
+```py
 import math  
 def circle(t, r):     
 	circumference = 2 * math.pi * r    
@@ -221,7 +221,7 @@ n 是我们用来逼近一个圆所用的线段数量，所以 length 就是每�
 
 与其让接口复杂冗余，更好的思路是让 n 根据周长来自适应一个合适的值：
 
-```Python
+```py
 def circle(t, r):     
 	circumference = 2 * math.pi * r     
 	n = int(circumference / 3) + 1     
@@ -238,7 +238,7 @@ def circle(t, r):
 
 一个替代的方法就是把 polygon 修改一下，转换成圆弧。结果大概如下所示：
 
-```Python
+```py
 def arc(t, r, angle):     
 	arc_length = 2 * math.pi * r * angle / 360     
 	n = int(arc_length / 3) + 1     
@@ -251,7 +251,7 @@ def arc(t, r, angle):
 
 这个函数的后半段看着和多边形那个还挺像的，但必须修改一下接口才能重利用多边形的代码。我们在多边形函数上增加 angle（角度）作为第三个参数，但继续叫多边形就不太合适了，因为不闭合啊！所以就改名叫它多段线 polyline：
 
-```Python
+```py
 def polyline(t, n, length, angle):     
 	for i in range(n):         
 	t.fd(length)         
@@ -260,7 +260,7 @@ def polyline(t, n, length, angle):
 
 现在就可以用多段线 polyline 来重写多边形 polygon 和圆弧 arc：
 
-```Python
+```py
 def polygon(t, n, length):     
 	angle = 360.0 / n     
 	polyline(t, n, length, angle)  
@@ -274,7 +274,7 @@ def arc(t, r, angle):
 
 最终，咱们就可以用圆弧 arc 来重写 circle 的实现了：
 
-```Python
+```py
 def circle(t, r):     
 	arc(t, r, 360) 
 ```
@@ -303,7 +303,7 @@ def circle(t, r):
 
 文档字符串是指：在函数开头部位，解释函数的交互接口的字符串，doc 是文档 documentation 的缩写。下面是一个例子：
 
-```Python
+```py
 def polyline(t, n, length, angle):     
 """
 Draws n line segments with the given length and     angle (in degrees) between them. 

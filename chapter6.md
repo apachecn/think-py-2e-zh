@@ -6,7 +6,7 @@
 
 对函数进行调用，就会产生一个返回的值，我们一般把这个值赋给某个变量，或者放进表达式中来用。
 
-```Python
+```py
 e = math.exp(1.0)
 height = radius * math.sin(radians)
 ```
@@ -15,7 +15,7 @@ height = radius * math.sin(radians)
 
 在本章，我们总算要写一些有返回值的函数了。第一个例子就是一个计算给定半径的圆的面积的函数：
 
-```Python
+```py
 def area(radius):
 	a = math.pi * radius**2
 	return a
@@ -23,14 +23,14 @@ def area(radius):
 
 返回语句我们之前已经遇到过了，但在有返回值的函数里面，返回语句可以包含表达式。这个返回语句的意思是：立即返回下面这个表达式作为返回值。返回语句里面的表达式可以随便多复杂都行，所以刚刚那个计算面积的函数我们可以精简改写成以下形式：
 
-```Python
+```py
 def area(radius):
 	return math.pi * radius**2
 ```
 
 另外，有一些临时变量可以让后续的调试过程更简单。所以有时候可以多设置几条返回语句，每一条都对应一种情况。
 
-```Python
+```py
 def absolute_value(x):
 	if x < 0:
 		return -x
@@ -43,7 +43,7 @@ def absolute_value(x):
 
 返回语句运行的时候，函数就结束了，也不会运行任何其他的语句了。返回语句后面的代码，执行流程里所有其他的位置都无法再触碰了，这种代码叫做『死亡代码』。在有返回值的函数里面，建议要确认一下每一种存在的可能，来让函数触发一个返回语句。下面例子中：
 
-```Python
+```py
 def absolute_value(x):
 	if x < 0:
 		return -x
@@ -53,7 +53,7 @@ def absolute_value(x):
 
 这个函数就是错误的，因为一旦 x 等于 0 了，两个条件都没满足，没有触发返回语句，函数就结束了。执行流程走完这个函数之后，返回的就是空（None），而本应该返回 0 的绝对值的。
 
-```Python
+```py
 >>> absolute_value(0)
 >>> absolute_value(0)
 None
@@ -77,7 +77,7 @@ $$distance = \sqrt{(x_2 − x_1)^2 + (y_2 − y_1)^2}$$
 
 这个案例里面，输入的应该是两个点的坐标，平面上就是四个数字了。返回的值是两点间的距离，就是一个浮点数了。
 
-```Python
+```py
 def distance(x1, y1, x2, y2):
 	return 0.0
 ```
@@ -87,7 +87,7 @@ def distance(x1, y1, x2, y2):
 
 要测试一下这个新函数，就用简单的参数来调用一下吧：
 
-```Python
+```py
 >>> distance(1, 2, 4, 6)
 0.0
 ```
@@ -97,7 +97,7 @@ def distance(x1, y1, x2, y2):
 
 现在我们已经确认过了，这个函数在语法上是正确的，接下来我们就可以在函数体内添加代码了。下一步先添加一下求 x2-x1 和 y2-y1 的值的内容。接下来的版本里面，就把它们存在一些临时变量里面，然后输出一下。
 
-```Python
+```py
 def distance(x1, y1, x2, y2):
 	dx = x2 - x1
 	dy = y2 - y1
@@ -108,7 +108,7 @@ def distance(x1, y1, x2, y2):
 
 这个函数如果工作的话，应该显示出'dx is 3'和'dy is 4'。如果成功显示了，我们就知道函数已经得到了正确的实际参数，并且正确进行了初步的运算。如果没有显示，只要检查一下这么几行代码就可以了。接下来，就要计算 dx 和 dy 的平方和了。
 
-```Python
+```py
 def distance(x1, y1, x2, y2):
 	dx = x2 - x1
 	dy = y2 - y1
@@ -119,7 +119,7 @@ def distance(x1, y1, x2, y2):
 
 在这一步，咱们依然亏运行一下程序，来检查输出，输出的应该是 25。输出正确的话，最后一步就是用 math.sqrt 这个函数来计算并返回结果：
 
-```Python
+```py
 def distance(x1, y1, x2, y2):
 	dx = x2 - x1
 	dy = y2 - y1
@@ -152,18 +152,18 @@ def distance(x1, y1, x2, y2):
 
 假设圆心的坐标存成一对变量：xc 和 yc，圆周上一点存成一对变量：xp 和 yp。第一步就是算出来这个圆的半径，也就是这两个点之间的距离。我们就用之前写过的那个 distance 的函数来完成这件事：
 
-```Python
+```py
 radius = distance(xc, yc, xp, yp)
 ```
 下一步就是根据计算出来的半径来算圆的面积；计算面积的函数我们也写过了：
 
-```Python
+```py
 result = area(radius)
 ```
 
 把上述的步骤组合在一个函数里面：
 
-```Python
+```py
 def circle_area(xc, yc, xp, yp):
 	radius = distance(xc, yc, xp, yp)
 	result = area(radius)
@@ -172,7 +172,7 @@ def circle_area(xc, yc, xp, yp):
 
 临时变量 radius 和 result 是用于开发和调试用的，只要程序能正常工作了，就可以把它们都精简下去：
 
-```Python
+```py
 def circle_area(xc, yc, xp, yp):
 	return area(distance(xc, yc, xp, yp))
 ```
@@ -180,7 +180,7 @@ def circle_area(xc, yc, xp, yp):
 
 函数也可以返回布尔值，这种情况便于隐藏函数内部的复杂测试。例如：
 
-```Python
+```py
 def is_divisible(x, y):
 	if x % y == 0:
 		return True
@@ -190,7 +190,7 @@ def is_divisible(x, y):
 
 一般情况下都给这种布尔函数起个独特的名字，比如要有判断意味的提示；is_divisible 这个函数就去判断 x 能否被 y 整除而对应地返回真或假。
 
-```Python
+```py
 >>> is_divisible(6, 4)
 False
 >>> is_divisible(6, 3)
@@ -198,20 +198,20 @@ True
 ```
 双等号运算符的返回结果是一个布尔值，所以我们可以用下面的方法来简化刚刚的函数：
 
-```Python
+```py
 def is_divisible(x, y):
 	return x % y == 0
 ```
 布尔函数经常用于条件语句：
 
-```Python
+```py
 if is_divisible(x, y):
 	print('x is divisible by y')
 ```
 
 可以用于写如下这种代码：
 
-```Python
+```py
 if is_divisible(x, y) == True:
 	print('x is divisible by y'
 ```
@@ -250,13 +250,13 @@ An adjective used to describe something that is vorpal.
 
 如果要给某种对象写一个递归的定义，就可以用 Python 程序来实现。第一步是要来确定形式参数是什么。在这种情况下要明确阶乘所用到的都应该是整形：
 
-```Python
+```py
 def factorial(n):
 ```
 
 如果传来的实际参数碰巧是 0，要返回 1：
 
-```Python
+```py
 def factorial(n):
 	if n == 0:
 		return 1
@@ -264,7 +264,7 @@ def factorial(n):
 
 其他情况就有意思了，我们必须用递归的方式来调用 n-1 的阶乘，然后用它来乘以 n：
 
-```Python
+```py
 def factorial(n):
 	if n == 0:
 		return 1
@@ -330,7 +330,7 @@ ________________________________________
 
 翻译成 Python 的语言大概如下这样：
 
-```Python
+```py
 def fibonacci (n):
 	if n == 0:
 		return 0
@@ -346,7 +346,7 @@ def fibonacci (n):
 
 如果我们让阶乘使用 1.5 做参数会咋样？
 
-```Python
+```py
 >>> factorial(1.5)
 RuntimeError: Maximum recursion depth exceeded
 ```
@@ -366,7 +366,7 @@ RuntimeError: Maximum recursion depth exceeded
 
 我们可以用内置的 isinstance 函数来判断参数的类型。我们也还得确定一下参数得是大于 0 的：
 
-```Python
+```py
 def factorial (n):
 	if not isinstance(n, int):
 		print('Factorial is only defined for integers.')
@@ -381,7 +381,7 @@ def factorial (n):
 ```
 第一个基准条件用来处理非整数；第二个用来处理负整数。在小数或者负数做参数的时候，函数就会输出错误信息，返回空到调用出来表明出错了：
 
-```Python
+```py
 >>> factorial('fred')
 Factorial is only defined for integers. None
 >>> factorial(-2)
@@ -414,7 +414,7 @@ Factorial is not defined for negative integers. None
 
 在函数的开头结尾添加输出语句，能够确保整个执行流程更加可视化。比如下面就是一个有输出版本的阶乘函数：
 
-```Python
+```py
 def factorial(n):
 	space = ' ' * (4 * n)
 	print(space, 'factorial', n)
@@ -430,7 +430,7 @@ def factorial(n):
 
 space 在这里是一串空格的字符串，是用来缩进输出的。下面就是 4 的阶乘得到的结果：
 
-```Python
+```py
       	           		factorial 4
      	        	factorial 3
     	     	factorial 2
@@ -475,7 +475,7 @@ A programming pattern that uses a conditional statement to check for and handle 
 
 为下面的程序画栈图。程序输出会是什么样的？
 
-```Python
+```py
 def b(z):
 	prod = a(z, z)
 	print(z, prod)
@@ -495,7 +495,7 @@ print(c(x, y+3, x+y))
 
 Ackermann 阿克曼函数的定义如下：
 
-```Python
+```py
 A(m, n) =   n+1	if  m = 0
 			A(m−1, 1)	if  m > 0  and  n = 0
 			A(m−1, A(m, n−1))	if  m > 0  and  n > 0.
@@ -510,7 +510,7 @@ A(m, n) =   n+1	if  m = 0
 
 下面的函数是把字符串作为实际参数，然后返回函数的头部、尾部以及中间字母：
 
-```Python
+```py
 def first(word):
 	return word[0]
 def last(word):

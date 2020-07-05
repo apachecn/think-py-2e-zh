@@ -6,7 +6,7 @@
 
 floor 除法，中文有一种翻译是地板除法，挺难听，不过凑活了，运算符是两个右斜杠：//，与传统除法不同，地板除法会把运算结果的小数位舍弃，返回整值。例如，加入一部电影的时间长度是 105 分钟。你可能想要知道这部电影用小时来计算是多长。传统的除法运算如下，会返回一个浮点小数：
 
-```Python
+```py
 >>> minutes = 105 
 >>> minutes / 60 
 1.75 
@@ -14,7 +14,7 @@ floor 除法，中文有一种翻译是地板除法，挺难听，不过凑活�
 
 不过一般咱们不写有小数的小时数。地板除法返回的就是整的小时数，舍弃掉小数位：
 
-```Python
+```py
 >>> minutes = 105 
 >>> hours = minutes // 60 
 >>> hours 
@@ -23,13 +23,13 @@ floor 除法，中文有一种翻译是地板除法，挺难听，不过凑活�
 
 想要知道舍弃那部分的长度，可以用分钟数减去这么一个小时，然后剩下的分钟数就是了：
 
-```Python
+```py
 >>> remainder = minutes - hours * 60 >>> remainder
 45 
 ```
 另外一个方法就是使用求模运算符了，百分号%就是了，求模运算就是求余数，会把两个数相除然后返回余数。
 
-```Python
+```py
 >>> remainder = minutes % 60 
 >>> remainder 
 45 
@@ -44,7 +44,7 @@ floor 除法，中文有一种翻译是地板除法，挺难听，不过凑活�
 
 布尔表达式是一种非对即错的表达式，只有这么两个值，true（真）或者 false（假）。下面的例子都用了双等号运算符，这个运算符会判断两边的值是否相等，相等就是 True，不相等就是 False：
 
-```Python
+```py
 >>> 5 == 5 
 True 
 >>> 5 == 6 
@@ -52,7 +52,7 @@ False
 ```
 True 和 False 都是特殊的值，属于 bool 布尔类型；它们俩不是字符串：
 
-```Python
+```py
 >>> type(True) 
 <class 'bool'>  
 >>> type(False) 
@@ -60,7 +60,7 @@ True 和 False 都是特殊的值，属于 bool 布尔类型；它们俩不是�
 ```
 双等号运算符是关系运算符的一种，其他关系运算符如下：
 
-```Python
+```py
 x != y	# x is not equal to y  		二者相等     
 x > y	# x is greater than y  		前者更大     
 x > y	# x is greater than y  		前者更大     
@@ -84,7 +84,7 @@ n%2 == 0 或 n%3 == 0，只要条件有一个成立就是真，就是说这个�
 
 严格来说，逻辑运算符的运算对象应该必须是布尔表达式，不过 Python 就不太严格。任何非零变量都会被认为是真：
 
-```Python
+```py
 >>> 42 and True 
 True 
 ```
@@ -94,7 +94,7 @@ True
 
 有用的程序必然要有条件检查判断的功能，根据不同条件要让程序有相应的行为。条件语句就让咱们能够实现这种判断。最简单的就是 if 语句了：
 
-```Python
+```py
 if x > 0:
 	print('x is positive') 
 ```
@@ -107,7 +107,7 @@ if 语句与函数定义的结构基本一样：一个头部，后面跟着缩�
 
 、复合语句中语句体内的语句数量是不限制的，但至少要有一个。有的时候会遇到一个语句体内不放语句的情况，比如空出来用来后续补充。这种情况下，你就可以用 pass 语句，就是啥也不会做的。
 
-```Python
+```py
 if x < 0:
 	pass          # TODO: need to handle negative values! 
 ```
@@ -115,7 +115,7 @@ if x < 0:
 
 if 语句的第二种形式就是『选择执行』，这种情况下会存在两种备选的语句，根据条件来判断执行哪一个。语法如下所示：
 
-```Python
+```py
 if x % 2 == 0:
 	print('x is even') 
 else:
@@ -128,7 +128,7 @@ I
 
 有时我们要面对的可能性不只有两种，需要更多的分支。这时候可以使用连锁条件来实现：
 
-```Python
+```py
 if x < y:     
 	print('x is less than y') 
 elif x > y:     
@@ -139,7 +139,7 @@ else:
 
 elif 是『else if』的缩写。这回也还是只会有一个分支的语句会被运行。elif 语句的数量是无限制的。如果有 else 语句的话，这个 else 语句必须放到整个条件链的末尾，不过 else 语句并不是必须有的。
 
-```Python
+```py
 if choice == 'a':
 	draw_a()
 elif choice == 'b':
@@ -154,7 +154,7 @@ elif choice == 'c':
 
 一个条件判断也可以嵌套在另一个条件判断内。上一节的例子可以改写成如下：
 
-```Python
+```py
 if x == y:
 	print('x and y are equal')
 else:
@@ -172,7 +172,7 @@ else:
 
 逻辑运算符有时候对简化嵌套条件判断很有用。比如下面这个代码就能改写成更简单的版本:
 
-```Python
+```py
 if 0 < x:
 	if x < 10:
 		print('x is a positive single-digit number.')
@@ -180,14 +180,14 @@ if 0 < x:
 
 上面的例子中，只有两个条件都满足了才会运行 print 语句，所以就用逻辑运算符来实现同样的效果即可：
 
-```Python
+```py
 if 0 < x and x < 10:
 	print('x is a positive single-digit number.')
 ```
 
 这种条件下，Python 提供了更简洁的表达方法：
 
-```Python
+```py
 if 0 < x < 10:
 	print('x is a positive single-digit number.')
 ```
@@ -196,7 +196,7 @@ if 0 < x < 10:
 
 一个函数可以去调用另一个函数；函数来调用自己也是允许的。这就是递归，是程序最神奇的功能之一，现在可能还不好理解为什么，那么来看看下面这个函数为例：
 
-```Python
+```py
 def countdown(n):
 	if n <= 0:
 		print('Blastoff!')
@@ -240,7 +240,7 @@ Blastoff!
 
 我们再写一个用 print 把一个字符串 s 显示 n 次的例子：
 
-```Python
+```py
 def print_n(s, n):
     if n <= 0:
         return
@@ -285,7 +285,7 @@ ________________________________________
 
 如果一个递归一直都不能到达基准条件，那就会持续不断地进行自我调用，程序也就永远不会终止了。这就叫无穷递归，一般这都不是个好事情哈。下面就是一个无穷递归的最简单的例子：
 
-```Python
+```py
 def recurse():
 	recurse()
 ```
@@ -340,7 +340,7 @@ What...is the airspeed velocity of an unladen swallow?
 
 如果用户输入的是其他内容，而不是一串数字，就会得到一个错误了：
 
-```Python
+```py
 >>> speed = input(prompt)
 What...is the airspeed velocity of an unladen swallow?
 What do you mean, an African or a European swallow?
@@ -378,7 +378,7 @@ IndentationError: unexpected indent
 
 在 Python，你可能像下面这样写：
 
-```Python
+```py
 import math
 signal_power = 9
 noise_power = 10
@@ -523,7 +523,7 @@ time 模块提供了一个名字同样叫做 time 的函数，会返回当前格
 
 下面的代码输出会是什么？画一个栈图来表示一下如下例子中程序输出结果时候的状态。
 
-```Python
+```py
 def recurse(n, s):
 	if n == 0:
 		print(s)
@@ -541,7 +541,7 @@ recurse(3, 0)
 
 阅读下面的函数，看看你能否弄清楚函数的作用。运行一下试试（参考第四章里面的例子来酌情修改代码）。
 
-```Python
+```py
 def draw(t, length, n):
 	if n == 0:
 		return

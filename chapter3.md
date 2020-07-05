@@ -6,7 +6,7 @@
 
 此前我们已经见识过函数调用的一个例子了：
 
-```Python
+```py
 >>> type(42)
 <class 'int'> 
 ```
@@ -15,7 +15,7 @@
 
 一般来说，函数都要“传入”一个参数，“返回”一个结果。结果也被叫做返回值。Python 提供了一些转换数值类型的函数。比如 int 这个函数就可以把值转换成整形，但不是什么都能转的，遇到不能转换的就会报错了，如下所示：
 
-```Python 
+```py 
 >>> int('32')  
 32 
 >>> int('Hello') 
@@ -24,7 +24,7 @@ ValueError: invalid literal for int(): Hello
  
 int 这个函数能把浮点数转成整形，但不是很完美，小数部分就都给砍掉了。
 
-```Python 
+```py 
 >>> int(3.99999)  
 3 
 >>> int(-2.3) 
@@ -33,7 +33,7 @@ int 这个函数能把浮点数转成整形，但不是很完美，小数部分�
 
 float 能把整形和字符串转变成浮点数：
 
-```Python 
+```py 
 >>> float(32) 
 32.0 
 >>> float('3.14159') 
@@ -42,7 +42,7 @@ float 能把整形和字符串转变成浮点数：
 
 最后来看下，str 可以把参数转变成字符串：
 
-```Python 
+```py 
 >>> str(32)  
 '32'  
 >>> str(3.14159) 
@@ -55,19 +55,19 @@ Python 内置了一个数学模块，这一模块提供了绝大部分常用的�
 
 在使用模块中的函数之前，必须先要导入这个模块，使用导入语句：
 
-```Python 
+```py 
 >>> import math 
 ```
 这个语句建立了一个模块对象，名字叫做 math。如果你让这个模块对象显示一下，你就会得到与之相关的信息了：
 
-```Python
+```py
 >>> math  
 <module 'math' (built-in)> 
 ```
 
 模块对象包含了一些已经定义好的函数和变量。指定模块名和函数名，要用点（也就是英文的句号）来连接模块名和函数名，就可以调用指定的函数了。
 
-```Python
+```py
 >>> ratio = signal_power / noise_power 
 >>> decibels = 10 * math.log10(ratio)  
 >>> radians = 0.7 
@@ -78,7 +78,7 @@ Python 内置了一个数学模块，这一模块提供了绝大部分常用的�
 
 第二个例子是对弧度值计算正弦值。通过变量名你应该能推测出正弦以及其他的三角函数（比如余弦、正切等等）都要用弧度值作为参数。所以要把角度的值从度转换成弧度，方法就是除以 180 然后再乘以圆周率π：
 
-```Python
+```py
 >>> degrees = 45 
 >>> radians = degrees / 180.0 * math.pi 
 >>> math.sin(radians) 
@@ -90,7 +90,7 @@ math.pi 这个表达式从数学模块中得到π的一个大概精确到 15 位
 
 了解了三角函数之后，你可以用试着把 2 的平方根除以二，然后对比一下这个结果和上一个结果：
 
-```Python
+```py
 >>> math.sqrt(2) / 2.0 
 0.707106781187 
 ```
@@ -103,18 +103,18 @@ math.pi 这个表达式从数学模块中得到π的一个大概精确到 15 位
 
 一门编程语言最有用的功能莫过于能够用一个个小模块来拼接创作。例如函数的参数可以是任何一种表达式，包括代数运算符：
 
-```Python
+```py
 x = math.sin(degrees / 360.0 * 2 * math.pi) ß
 ```
 再或者函数的调用本身也可以作为参数：
 
-```Python
+```py
 x = math.exp(math.log(x+1)) 
 ```
 
 你可以在任何地方放一个值，放任何一个表达式，只有一个例外：一个声明语句的左边必须是变量名。任何其他的表达式放到等号左边都会导致语法错误（当然也有例外，等会再给介绍）。
 
-```Python
+```py
 >>> minutes = hours * 60                 # right  
 >>> hours * 60 = minutes                 # wrong! 
 SyntaxError: can't assign to operator 
@@ -126,7 +126,7 @@ SyntaxError: can't assign to operator
 
 目前我们学到了一些 Python 自带的函数，自己定义新的函数也是可以的。函数定义要指定这个新函数的名字，还需要一系列语句放到这个函数里面，当调用这个函数的时候，就会运行这些语句了。
 
-```Python
+```py
 def print_lyrics():
     print("I'm a lumberjack, and I'm okay.")
     print("I sleep all night and I work all day.")
@@ -150,7 +150,7 @@ def print_lyrics():
 
 如果你在交互模式下面定义函数，解释器会显示三个小点来提醒你定义还没有完成：
 
-```Python
+```py
 >>> def print_lyrics(): 
 ...     
 print("I'm a lumberjack, and I'm okay.") ...     
@@ -158,7 +158,7 @@ print("I sleep all night and I work all day.") ...
 ```
 在函数定义完毕的结尾，必须输入一行空白行。定义函数会创建一个函数类的对象，有 type 函数。
 
-```Python
+```py
 >>> print(print_lyrics) 
 <function print_lyrics at 0xb7e99e9c> 
 >>> type(print_lyrics) 
@@ -167,14 +167,14 @@ print("I sleep all night and I work all day.") ...
 
 调用新函数的语法和调用内置函数是一样的：
 
-```Python
+```py
 >>> print_lyrics() 
 I'm a lumberjack, and I'm okay. I sleep all night and I work all day. 
 ```
 
 一旦你定义了一个函数，就可以在其它函数里面来调用这个函数。比如咱们重复一下刚刚讨论的，写一个叫做重 repeat_lyrics 的函数。
 
-```Python
+```py
 def repeat_lyrics():
 	print_lyrics()
     
@@ -182,7 +182,7 @@ def repeat_lyrics():
 
 然后调用一下这个函数：
 
-```Python
+```py
 >>> repeat_lyrics() 
 I'm a lumberjack, and I'm okay. I sleep all night and I work all day. I'm a lumberjack, and I'm okay. I sleep all night and I work all day. 
 ```
@@ -193,7 +193,7 @@ I'm a lumberjack, and I'm okay. I sleep all night and I work all day. I'm a lumb
 
 把前面这些小块的代码来整合一下，整体上程序看着大概是这样的：
 
-```Python
+```py
 def print_lyrics():     
 	print("I'm a lumberjack, and I'm okay.")     
 	print("I sleep all night and I work all day.")  
@@ -244,7 +244,7 @@ repeat_lyrics()
 
 在函数里面，实际参数会被赋值给形式参数。下面就是一个使用单个实际参数的函数的定义：
 
-```Python
+```py
 def print_twice(bruce):
 	print(bruce)     
 	print(bruce) 
@@ -253,7 +253,7 @@ def print_twice(bruce):
 
 这个函数把传来的实际参数的值赋给了一个名字叫做 burce 的形式参数。当函数被调用的时候，就会打印出形式参数的值两次（无论是什么内容）。任何能打印的值都适用于这个函数。
 
-```Python
+```py
 >>> print_twice('Spam')  
 Spam 
 Spam 
@@ -266,7 +266,7 @@ Spam
 ```
 
 适用于 Python 内置函数的组合规则对自定义的函数也是适用的，所以我们可以把表达式作为实际参数：
-```Python
+```py
 >>> print_twice('Spam '*4) 
 Spam Spam Spam Spam 
 Spam Spam Spam Spam 
@@ -279,7 +279,7 @@ Spam Spam Spam Spam
 
 当然了，也可以用变量做实际参数了：
 
-```Python
+```py
 >>> michael = 'Eric, the half a bee.' 
 >>> print_twice(michael) 
 Eric, the half a bee. 
@@ -294,7 +294,7 @@ Eric, the half a bee.
 
 在函数内部建立一个变量，这个变量是仅在函数体内部才存在。例如：
 
-```Python
+```py
 def cat_twice(part1, part2):     
 	cat = part1 + part2     
 	print_twice(cat) 
@@ -303,7 +303,7 @@ def cat_twice(part1, part2):
 
 这个函数得到两个实参，把它们连接起来，然后调用 print_twice 函数来输出结果两次。
 
-```Python
+```py
 >>> line1 = 'Bing tiddle ' 
 >>> line2 = 'tiddle bang.' 
 >>> cat_twice(line1, line2) 
@@ -313,7 +313,7 @@ Bing tiddle tiddle bang.
 
 当 cat_twice 运行完毕了，这个名字叫做 cat 的变量就销毁了。咱们再尝试着打印它一下，就会得到异常：
 
-```Python
+```py
 >>> print(cat) 
 NameError: name 'cat' is not defined 
 ```
@@ -344,7 +344,7 @@ NameError: name 'cat' is not defined
 
 例如，如果你想在 print_twice 这个函数中读取 cat 的值，就会得到一个变量名错误：
 
-```Python
+```py
 Traceback (innermost last):  
 File "test.py", line 13, in __main__  
 cat_twice(line1, line2)   
@@ -367,14 +367,14 @@ NameError: name 'cat' is not defined
 
 当你调用一个有返回值的函数的时候，一般总是要利用一下结果的；比如，你可能需要把结果赋值给某个变量，然后在表达式里面来使用一下：
 
-```Python
+```py
 x = math.cos(radians) 
 golden = (math.sqrt(5) + 1) / 2 
 ```
 
 当你在交互模式调用一个函数的时候，Python 会显示结果：
 
-```Python
+```py
 >>> math.sqrt(5) 
 2.2360679774997898 
 >>> math.sqrt(5)
@@ -383,7 +383,7 @@ golden = (math.sqrt(5) + 1) / 2
 
 如果是脚本模式，你运行一个有返回值的函数，但没有利用这个返回值，这个返回值就会永远丢失了！（译者注：只要有返回值就一定要利用！）
 
-```Python
+```py
 math.sqrt(5) 
 ```
 
@@ -392,7 +392,7 @@ math.sqrt(5)
 
 无返回值的函数要么就是屏幕上显示出一些内容，要么就有其他的功能，但就是没有返回值。如果你把这种函数的结果返回给一个变量，就会的到特殊的值：空。
 
-```Python
+```py
 >>> result = print_twice('Bing')  
 Bing Bing 
 >>> print(result) 
@@ -401,7 +401,7 @@ None
 
 这种 None 是空值的意思，和字符串'None'是不一样的。是一种特殊的值，并且有自己的类型。（译者注，就相当于 null 了。）
 
-```Python
+```py
 >>> print(type(None)) 
 <class 'NoneType'> 
 ```
@@ -549,7 +549,7 @@ A list of the functions that are executing, printed when an exception occurs.
 
 写一个名叫 right_justify 的函数，形式参数是名为 s 的字符串，将字符串打印，前面流出足够的空格，让字符串最后一个字幕在第 70 列显示。
 
-```Python
+```py
 >>> right_justify('monty')                                                                  monty 
 ```
 
@@ -559,7 +559,7 @@ A list of the functions that are executing, printed when an exception occurs.
 
 你可以把一个函数对象作为一个值赋给一个变量或者作为一个实际参数来传递给其他函数。比如，do_twice 就是一个把其他函数对象当做参数的函数，它的功能是调用对象函数两次：
 
-```Python
+```py
 def do_twice(f):     
     f()     
     f() 
@@ -567,7 +567,7 @@ def do_twice(f):
 
 下面是另一个例子，这里用了 do_twice 来调用一个名叫 print_spam 的函数两次。
 
-```Python
+```py
 def print_spam():     
 print('spam')  
 do_twice(print_spam) 
@@ -594,13 +594,13 @@ do_twice(print_spam)
 
 提示：要一次打印超过一行，可以用逗号分隔一下就能换行了。如下所示：
 
-```Python
+```py
 print('+', '-') 
 ```
 
 默认情况下，print 会打印到下一行，你可以手动覆盖掉这个行为，在末尾输出一个空格就可以了：
 
-```Python
+```py
 print('+', end=' ') 
 print('-') 
 ```

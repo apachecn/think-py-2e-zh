@@ -153,6 +153,14 @@ Think Python 这本书是面向初学者介绍 Python 编程。
 
 ## 下载
 
+### PYPI
+
+```
+pip install think-py-2e-zh
+think-py-2e-zh <port>
+# 访问 http://localhost:{port} 查看文档
+```
+
 ### NPM
 
 ```

@@ -149,3 +149,14 @@ Think Python 这本书是面向初学者介绍 Python 编程。
 
 （译者注：以下贡献列表省略不在此处提供，有兴趣的朋友可以去看英文原版。）
 
+
+
+## 下载
+
+### NPM
+
+```
+npm install -g think-py-2e-zh
+think-py-2e-zh <port>
+# 访问 http://localhost:{port} 查看文档
+```

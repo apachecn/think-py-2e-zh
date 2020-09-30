@@ -153,6 +153,14 @@ Think Python 这本书是面向初学者介绍 Python 编程。
 
 ## 下载
 
+### Docker
+
+```
+docker pull apachecn0/think-py-2e-zh
+docker run -tid -p <port>:80 apachecn0/think-py-2e-zh
+# 访问 http://localhost:{port} 查看文档
+```
+
 ### PYPI
 
 ```

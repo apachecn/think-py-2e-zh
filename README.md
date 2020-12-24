@@ -10,6 +10,7 @@
 
 
 +   [在线阅读](https://think-py.apachecn.org)
++   [在线阅读（Gitee）](https://apachecn.gitee.io/think-py-2e-zh/)
 
 ## 译者的话
 这是一本很经典的 Python 入门教材，也是一本很适合初学者的编程入门书籍。网上有过一些翻译，不过我觉得都还是自己动手来尝试一下，这样更有利于深入了解和体验，所以就再造轮子了。
